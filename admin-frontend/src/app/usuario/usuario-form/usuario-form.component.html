@@ -1,0 +1,68 @@
+
+<form novalidate (ngSubmit)="registrarUsuario()" [formGroup]="usuarioForm">
+    <mat-card>
+      <mat-toolbar #toolBar>
+        <mat-toolbar-row>
+          <span class="view-card-title"> Registrar Usuario</span>
+          <span class="title-spacer"></span>
+          <mat-card-actions>
+            <button mat-mini-fab class="primary" [ngClass]="{'activado' : usuarioForm.valid, 'desactivado': !usuarioForm.valid  }" type="submit" [disabled]='!usuarioForm.valid || procesando'>
+              <mat-icon>save</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" #cancelar [routerLink]="['/usuarios/consultar']" [disabled]='procesando'>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-toolbar-row>
+      </mat-toolbar>
+  
+      <mat-card-content #card>
+        <div class="form-card">
+          <mat-grid-list cols="12" rowHeight="80px">
+            <mat-grid-tile [colspan]="4">
+              <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput id="email" type="email" formControlName="email" [(ngModel)]="Usuario.email" required/>
+                <mat-error *ngIf="usuarioForm.controls.email.errors?.email">Email inválido</mat-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="4">
+              <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput #password type="password" formControlName="password" [(ngModel)]="User.password" required minlength="4"/>
+                <mat-error *ngIf="usuarioForm.controls.password.hasError('minlength')">Debe ingresar al menos 4 caracteres</mat-error>
+                <mat-icon class="icon-pwd" matSuffix (click)="showPassword(password)" [matTooltip]="password.type === 'password' ? 'Mostrar password' : 'Ocultar password'">remove_red_eye</mat-icon>
+              </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [colspan]="4">
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Rol</mat-label>
+                    <mat-select formControlName="rol" [(ngModel)]="Usuario.rol.nombre">
+                    <mat-option value="Administrador">Administrador</mat-option>
+                    <mat-option value="Blogger">Blogger</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="4">
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Departamento</mat-label>
+                    <mat-select formControlName="departamento" [(ngModel)]="Usuario.departamento.nombre">
+                    <mat-option *ngFor="let departamento of departamentos" [value]="departamento.nombre">{{departamento.nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+          </mat-grid-list>
+        </div>  
+      </mat-card-content>
+  
+      <div *ngIf="procesando" fxLayout="row" fxLayoutAlign="center center">
+        <mat-spinner [diameter]="70" class="spinner"></mat-spinner>
+      </div>
+  
+    </mat-card>
+  </form>

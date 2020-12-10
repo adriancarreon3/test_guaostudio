@@ -1,0 +1,29 @@
+﻿<div id="shape">
+  <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+    <path d="M0.00,49.98 C149.99,150.00 271.49,-49.98 500.00,49.98 L500.00,0.00 L0.00,0.00 Z"></path>
+  </svg>
+</div>
+
+<div  id="container" class="container">
+  <mat-card class="login-card" >
+    <form novalidate class="loginForm" name="form" (ngSubmit)="login()" [formGroup]="loginForm">
+      <mat-card-header >
+        <h1>Iniciar sesión</h1>
+      </mat-card-header>
+      <mat-card-content class="field-item">
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email" name="email" formControlName="email" [(ngModel)]="Usuario.email" required/>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-content class="field-item">
+        <mat-form-field>
+          <input matInput type="password" placeholder="Contraseña" name="password" formControlName="password" [(ngModel)]="Usuario.password" required/>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions class="action-item">
+        <button mat-raised-button [disabled]="!loginForm.valid" color="primary">Listo</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

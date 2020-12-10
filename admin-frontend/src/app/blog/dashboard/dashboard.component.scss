@@ -1,0 +1,64 @@
+::ng-deep .mat-card-header#cabecera{
+  background-color: rgb(245,245,245) !important;
+  padding:5px !important;
+  color: rgb(50, 50, 50);
+}
+
+::ng-deep .mat-card#tarjeta{
+  padding:0 !important;
+}
+
+::ng-deep .mat-card-content#tarjeta{
+  padding:5px !important;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+mat-card-title{
+  font-size: 14px !important;
+}
+
+mat-icon{
+  width: 20px; height: 20px; text-align: center; margin-left: 8px; margin-top: 8px;
+}
+
+.sangria{
+  margin-top: 10px;
+  margin-left: 2px;
+}
+
+.example-container.mat-elevation-z8 {    
+  overflow-y: auto;
+}
+
+.light{
+  background-color: rgb(250,250,250);
+}
+
+h2{
+  margin-left: 10px;
+}
+
+.tipo_evento{
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#titulo{
+  color: black !important;
+  font-size: 20px !important;
+}
+
+#tarjeta{
+  border: 1px solid #cccccc; margin-top: 10px ;
+}
+
+#icono-tarjeta{
+  width: 40px; height: 40px;
+}
+
+#contenido{
+  width: 100%;
+}

@@ -1,0 +1,71 @@
+
+
+<mat-progress-bar *ngIf="isloading" class="progress-bar" mode="indeterminate"  ></mat-progress-bar>
+
+<div *ngIf="!usuarioServicio.isAuthenticated()">
+  <login-form (isAuth)="isAuth($event)"></login-form>
+</div>
+
+<div *ngIf="iniciar==true && usuarioServicio.isAuthenticated()" [ngClass]="uiContent" role="main">
+  <mat-spinner [diameter]="150" class="spinner"></mat-spinner>
+</div>
+
+<div *ngIf="usuarioServicio.isAuthenticated() && !iniciar" [ngClass]="uiContent" role="main">
+  <mat-sidenav-container class="app-container" autosize fullscreen>
+    <mat-sidenav dark #sidenav id="appnav" [mode]="mode" [opened]="!isMobile">
+      <mat-card class="profile-card">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">  
+          <div mat-card-avatar class="avatar" fxFlex="10">
+            <img src="/assets/img/flash1.jpg" class="avatar">
+          </div>
+          
+          <div class="nombre" fxFlex="70">
+            {{usuario_blog?.email}}
+          </div>
+
+          <button mat-icon-button [matMenuTriggerFor]="menu" fxFlex="10">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </mat-card-header> 
+
+        <mat-menu #menu="matMenu">
+          <button id="btnLogout" mat-menu-item (click)="logout()"><mat-icon>power_settings_new</mat-icon>Cerrar Sesión</button>
+        </mat-menu>
+      </mat-card>
+
+      <mat-nav-list >
+
+        <a mat-list-item routerLink="blog">
+          <mat-icon mat-list-icon >chat</mat-icon>
+          <span mat-line>Blog</span>
+        </a>
+        
+        <a *ngIf="permisos==1" mat-list-item routerLink="departamentos/consultar">
+          <mat-icon mat-list-icon>people</mat-icon>
+          <span mat-line>Departamentos</span>
+        </a>
+
+        <a *ngIf="permisos==1" mat-list-item routerLink="usuarios/consultar">
+          <mat-icon mat-list-icon>account_box</mat-icon>
+          <span mat-line>Usuarios</span>
+        </a>
+        
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content" > 
+      <mat-toolbar dark id="toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon id="icon-list">list</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div class="main-content" >
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+</div>
+
+

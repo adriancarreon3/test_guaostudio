@@ -1,0 +1,38 @@
+
+<form novalidate (ngSubmit)="registrarDepartamento()" [formGroup]="departamentoForm">
+    <mat-card>
+  
+      <mat-toolbar #toolBar>
+        <mat-toolbar-row>
+          <span class="view-card-title"> Registrar Departamento</span>
+          <span class="title-spacer"></span>
+          <mat-card-actions>
+            <button mat-mini-fab class="primary" [ngClass]="{'activado' : departamentoForm.valid, 'desactivado': !departamentoForm.valid  }" type="submit" [disabled]='!departamentoForm.valid || procesando'>
+              <mat-icon>save</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" #cancelar [routerLink]="['/departamentos/consultar']" [disabled]='procesando'>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-toolbar-row>
+      </mat-toolbar>
+  
+      <mat-card-content #card>
+        <div class="form-card">
+          <mat-grid-list cols="12" rowHeight="80px">
+            <mat-grid-tile [colspan]="6">
+              <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Nombre del departamento</mat-label>
+                <input matInput id="nom_dpto" type="text" formControlName="nom_dpto" [(ngModel)]="Departamento.nombre" required/>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>  
+      </mat-card-content>
+  
+      <div *ngIf="procesando" fxLayout="row" fxLayoutAlign="center center">
+        <mat-spinner [diameter]="70" class="spinner"></mat-spinner>
+      </div>
+  
+    </mat-card>
+  </form>

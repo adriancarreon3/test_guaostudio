@@ -1,0 +1,59 @@
+<div fxLayout="row">
+    <div fxFlex="75">
+        <mat-card class='light'>
+            <mat-toolbar class="primary">
+                <mat-toolbar-row>
+                    <mat-form-field appearance="standard" class="search-form-fileld">
+                    <mat-label>Filtrar</mat-label>
+                    <input matInput (keyup)="applyFilter($event.target.value)">
+                    </mat-form-field>
+                </mat-toolbar-row>
+            </mat-toolbar>
+
+            <div class="example-container mat-elevation-z8">
+                <div  class="example-container2">
+                  <mat-table #table [dataSource]="dataSource" matSort>
+            
+                    <ng-container matColumnDef="icono">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                      <mat-cell *matCellDef="let usuario"> <mat-icon class="icono-table">account_circle</mat-icon> </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="email">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                      <mat-cell *matCellDef="let usuario"> {{usuario.email}} </mat-cell>
+                    </ng-container>                    
+                    
+                    <ng-container matColumnDef="rol">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Rol </mat-header-cell>
+                      <mat-cell *matCellDef="let usuario"> {{usuario.rol.nombre}} </mat-cell>
+                    </ng-container>
+      
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="row"></mat-row>
+                  </mat-table>
+                </div>
+      
+                <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[10,25]"></mat-paginator>
+            </div>
+
+        </mat-card>
+    </div>
+
+    <div fxFlex="25" fxFlexOffset="2.5">
+        <mat-card *ngIf="Departamento" class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image2"></div>
+                <mat-card-title> <h2> {{Departamento.nombre}}</h2> </mat-card-title>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+            <br>
+
+            <mat-card-header>
+                <mat-card-title class="sangria"> {{ usuarios.length }}</mat-card-title>
+                <mat-card-subtitle>Núm. de usuarios</mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+    </div>
+</div>
